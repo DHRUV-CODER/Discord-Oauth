@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+
+    />
+    <link rel="shortcut icon" href="https://yt3.ggpht.com/ytc/AAUvwngHu0mU1UvMQPWZZM1mFsTJTwZH_EoymRvmG23peQ=s900-c-k-c0x00ffffff-no-rj" />
+    <meta property="og:title" content="Discord Dashboard & Stats" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://Covid-19-API.dhruvnation1.repl.co" />
+    <meta property="og:image" content="https://yt3.ggpht.com/ytc/AAUvwngHu0mU1UvMQPWZZM1mFsTJTwZH_EoymRvmG23peQ=s900-c-k-c0x00ffffff-no-rj"
+    />
+    <meta property="og:description" content="Discord Dashboard" />
+    <meta name="theme-color" content="#000000">
+    <title>Login Page</title>
+    <style>
+      body {
+        background: #B2FEFA;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #0ED2F7, #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+#btn {
+  padding: 200px;
+}
+nav {
+  padding: 10px;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">
+        <img
+          src="https://i.redd.it/s9biyhs4lix61.jpg"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        <strong>
+          Discord Dashboard
+        </strong>
+      </a>
+    </nav>
+    <center>
+      <div id="btn">
+      {% if auth == False %}
+      <a href="{{discord_url}}"
+        ><button type="button" class="btn btn-info">Login With Discord</button></a
+      >
+      {% else %}
+      <a href="/stats"
+      ><button type="button" class="btn btn-success">Dashboard</button></a
+    >
+    {% endif %}
+    {% if auth == True %}
+    <a href="/logout">
+      <button type="button" class="btn btn-danger">Log Out</button>
+    </center>
+    {% endif %}
+    <div>
+  </body>
+</html>

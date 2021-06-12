@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="https://yt3.ggpht.com/ytc/AAUvwngHu0mU1UvMQPWZZM1mFsTJTwZH_EoymRvmG23peQ=s900-c-k-c0x00ffffff-no-rj"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#flip").click(function () {
+          $("#panel").slideToggle("slow");
+        });
+        $("#flip").click(function () {
+          $("#abt-me").slideToggle();
+        });;
+      });
+      
+    </script>
+    <title>Stats</title>
+    <style>
+      body {
+        background: #fc5c7d; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #6a82fb,
+          #fc5c7d
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+          to right,
+          #6a82fb,
+          #fc5c7d
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      img {
+        border-radius: 50%;
+      }
+
+      img:hover {
+        transform: scale(1.1);
+      }
+      #panel,
+      #flip {
+        padding: 5px;
+        text-align: center;
+        background-color: transparent;
+        /* border: solid 1px black; */
+      }
+
+      h1#email {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      #panel {
+        padding: 50px;
+        display: none;
+      }
+      h1:hover {
+        color: wheat;
+      }
+      .footer {
+        /* position: fixed; */
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
+      #all-servers {
+        padding: 10px;
+        background: transparent;
+      }
+      #show-servers {
+        padding: 20px;
+      }
+      
+		/* Works on Firefox */
+		* {
+			scrollbar-width: thin;
+			scrollbar-color: grey black;
+		}
+
+		/* Works on Chrome, Edge, and Safari */
+		*::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		*::-webkit-scrollbar-track {
+			background: black;
+		}
+
+		*::-webkit-scrollbar-thumb {
+			background-color: grey;
+			border-radius: 20px;
+			border: 1px solid black;
+		}
+    .img-responsive {
+      height: 30px;
+    }
+    .btn btn-danger collapsed {
+      padding: 10px;
+    }
+
+    div {
+      padding: 5px;
+    }
+
+    a { color: inherit; } 
+
+    </style>
+  </head>
+  <body>
+    <center>
+      <div id="flip">
+        <button type="button" class="btn btn-primary">About You</button>
+      </div>
+      <div id="panel">
+        <a href="{{avatar}}"
+        target="_blank" ><img src="{{avatar}}" alt="Your Profile Image"
+        /></a>
+        <h1>User ID: <strong>{{username}}#{{discriminator}}</strong></h1>
+        <h1 id="email">Your Email :- <strong>{{email}}</strong></h1>
+        {% if pt == 0 %}
+        <h1>You Don`t Have <strong>Nitro</strong></h1>
+        {% elif pt == 1 %}
+        <h1>You Have <strong>Nitro Classic</strong></h1>
+        {% elif pt == 2 %}
+        <h1>You Have <strong>Nitro</strong></h1>
+        {% else %}
+        <h1>Failed To Get Information On <strong>Premium Details </strong></h1>
+        {% endif %}
+      </div>
+      <div id="abt-me">
+        <center>
+          <h1>Click <strong>About Me </strong> For More Info</h1>
+        </center>
+      </div>
+    </center>
+    <div class="footer">
+      <center>
+        <a href="/">
+          <button type="button" class="btn btn-warning">🏠Home</button></a
+        >
+        <a href="/logout">
+          <button type="button" class="btn btn-dark">Log Out</button></a
+        >
+      </center>
+    </div>
+    <center>
+    <div>
+      <!-- <button type="button" class="btn btn-danger">Show/Hide {{Total_Server}} Servers</button> -->
+      <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#your-all-servers">You Own {{Your_Total_Server}} Servers</button>
+    </div>
+    <div id="your-all-servers" class="collapse">
+      {% for guild in render_guild %}
+      {% if guild['owner'] == True %}
+      <h4>
+
+        {% if guild['icon'] is not none %}
+          
+        <a href="https://discord.com/channels/{{ guild['id'] }}/" target="_blank">
+          <img class="img-responsive" style="display:inline-block; height:30px margin-top-5px" src="https://cdn.discordapp.com/icons/{{ guild['id'] }}/{{ guild['icon'] }}.png" height="30px" />
+          {% else %}
+          <a href="https://discord.com/channels/{{ guild['id'] }}/" target="_blank">
+          <img
+            src="https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png"
+            
+            height="30px"  />
+          
+          {% endif %}
+          {{ guild['name'] }}</a></a>
+          {% else %}
+          {% endif %}
+      </h4>
+  {% endfor %}
+    </div></center>
+
+    <center>
+      <div>
+        <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#all-servers">Show/Hide {{Total_Server}} Servers</button>
+      </div>
+
+      <div id="all-servers" class="collapse">
+        {% for guild in render_guild %}
+        <h4>
+  
+          {% if guild['icon'] is not none %}
+            
+          <a href="https://discord.com/channels/{{ guild['id'] }}/" target="_blank" >
+            <img class="img-responsive" style="display:inline-block; height:30px margin-top-5px" src="https://cdn.discordapp.com/icons/{{ guild['id'] }}/{{ guild['icon'] }}.png" height="30px" />
+            {% else %}
+            <a href="https://discord.com/channels/{{ guild['id'] }}/" target="_blank">
+            <img
+              src="https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png"
+              
+              height="30px"  />
+            
+            {% endif %}
+            {{ guild['name'] }}</a></a>
+        </h4>
+    {% endfor %}
+      </div>
+    </center>
+
+  </body>
+</html>
