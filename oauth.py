@@ -1,13 +1,17 @@
 import requests
+import json
+
+with open('credentials.json') as f:
+    cred = json.load(f)
+    CLIENT_SECREAT = cred['client_secreat']
 
 
 class Oauth:
-    client_id = "" #client id
-    client_secret = ""#client secreat
-    redirect_uri = "http://127.0.0.1:5000/login"
-    scope = "identify%20email%20guilds"#scopes
-    # Paste the generated Oauth2 link here
-    discord_login_url = "" #login url
+    client_id = "792426758829768744"
+    client_secret = CLIENT_SECREAT
+    redirect_uri = "https://dsc-dashboard.herokuapp.com/login"
+    scope = "identify%20email%20guilds"
+    discord_login_url = f"https://discord.com/api/oauth2/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code&scope=identify%20email%20guilds"
     discord_token_url = "https://discord.com/api/oauth2/token"
     discord_api_url = "https://discord.com/api"
 
@@ -33,7 +37,7 @@ class Oauth:
 
         user_object = requests.get(url=url, headers=headers).json()
         return user_object
-    
+
     @staticmethod
     def get_user_current_guild(access_token):
         user_guild_object = requests.get(
@@ -42,5 +46,3 @@ class Oauth:
         ).json()
 
         return user_guild_object
-        
-

@@ -18,6 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script>
       $(document).ready(function () {
         $("#flip").click(function () {
@@ -59,17 +60,16 @@
         /* border: solid 1px black; */
       }
 
-      h1#email {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
+
 
       #panel {
         padding: 50px;
         display: none;
       }
-      h1:hover {
-        color: wheat;
+      h1 {
+        font-family: monospace;
       }
+
       .footer {
         /* position: fixed; */
         left: 0;
@@ -117,7 +117,31 @@
       padding: 5px;
     }
 
-    a { color: inherit; } 
+    a {
+            text-decoration: none;
+        }
+
+        /* unvisited link */
+        a:link {
+            color: black;
+        }
+
+        /* visited link */
+        a:visited {
+            color: black;
+        }
+
+        /* mouse over link */
+        a:hover {
+            text-decoration: none;
+            font-weight: 900;
+        }
+
+        /* selected link */
+        a:active {
+            color: white;
+            
+        }
 
     </style>
   </head>
@@ -127,11 +151,22 @@
         <button type="button" class="btn btn-primary">About You</button>
       </div>
       <div id="panel">
-        <a href="{{avatar}}"
-        target="_blank" ><img src="{{avatar}}" alt="Your Profile Image"
+        <a href="https://cdn.discordapp.com/avatars/{{user['id']}}/{{user['avatar']}}"
+        target="_blank" ><img src="https://cdn.discordapp.com/avatars/{{user['id']}}/{{user['avatar']}}" alt="{{user['username']}}'s Profile Image"
         /></a>
-        <h1>User ID: <strong>{{username}}#{{discriminator}}</strong></h1>
-        <h1 id="email">Your Email :- <strong>{{email}}</strong></h1>
+        <h1>User ID: <strong>{{user['username']}}#{{user['discriminator']}}</strong></h1>
+        {% if user['verified'] == True %}
+        <h1>Your Email : <strong>{{user['email']}} </strong><u style="font-family: monospace;color: wheat;">verified</u></h1>
+        {% else %}
+        <h1>Your Email : <strong>{{user['email']}} </strong><u style="font-family: monospace; color: wheat;">Unverified</u></h1>
+        {% endif %}
+        <h1>Language Used <strong>{{user['locale']}}</strong></h1>
+        
+        {% if user['mfa_enabled'] == True %}
+        <h1>Nice You Have <strong>2 FA Enabled</strong></h1>
+        {% else %}
+        <h1>You Don't Have <strong>2 FA Enabled</strong> <span>😱</span></h1>
+        {% endif %}
         {% if pt == 0 %}
         <h1>You Don`t Have <strong>Nitro</strong></h1>
         {% elif pt == 1 %}
@@ -139,7 +174,7 @@
         {% elif pt == 2 %}
         <h1>You Have <strong>Nitro</strong></h1>
         {% else %}
-        <h1>Failed To Get Information On <strong>Premium Details </strong></h1>
+        <h1>Failed To Get Information On <strong><u>Premium Details</u></strong></h1>
         {% endif %}
       </div>
       <div id="abt-me">
@@ -171,7 +206,7 @@
         {% if guild['icon'] is not none %}
           
         <a href="https://discord.com/channels/{{ guild['id'] }}/" target="_blank">
-          <img class="img-responsive" style="display:inline-block; height:30px margin-top-5px" src="https://cdn.discordapp.com/icons/{{ guild['id'] }}/{{ guild['icon'] }}.png" height="30px" />
+          <img src="https://cdn.discordapp.com/icons/{{ guild['id'] }}/{{ guild['icon'] }}.png" height="30px" />
           {% else %}
           <a href="https://discord.com/channels/{{ guild['id'] }}/" target="_blank">
           <img
